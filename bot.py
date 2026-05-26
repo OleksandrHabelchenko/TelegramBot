@@ -23,8 +23,8 @@ def help(message):
 @bot.message_handler(commands=['time'])   # triggers when user sends /time
 def time(message):
     import datetime
-    now = datetime.datetime.now().strftime('%H:%M:%S')  # get current time
-    bot.send_message(message.chat.id, f'now: {now}')
+    now = datetime.datetime.utcnow() + datetime.timedelta(hours=3)  # get current time
+    bot.send_message(message.chat.id, f'now: {now.strftime("%H:%M:%S")}')
 
 @bot.message_handler(commands=['joke'])   # triggers when user sends /joke
 def joke(message):
@@ -88,3 +88,14 @@ def echo(message):
 
 bot.polling()  # start bot, listen for new messages
 
+# Декораторы @bot.message_handler — это способ сказать боту "когда получишь такое сообщение — вызови вот эту функцию".
+# Команда /start — создаёт клавиатуру с кнопками и отправляет приветствие.
+# Команда /help — отправляет список всех команд.
+# Команда /time — берёт текущее время с сервера и отправляет пользователю.
+# Команда /joke — выбирает случайную шутку из списка и отправляет.
+# Команда /weather — спрашивает город, ждёт ответа через register_next_step_handler, потом вызывает get_weather.
+# Функция get_weather — отправляет запрос на openweathermap.org, получает данные в виде словаря JSON, берёт температуру и описание и отправляет пользователю.
+# Обработчики кнопок — когда пользователь нажимает кнопку на клавиатуре — это просто текстовое сообщение. Мы проверяем текст и вызываем нужную функцию.
+# Команда /about — создаёт inline кнопки со ссылками на GitHub и телеграм автора.
+# Функция echo — срабатывает на любое сообщение которое не является командой, повторяет его обратно.
+# bot.polling() — запускает бота, он постоянно проверяет есть ли новые сообщения и обрабатывает их.
