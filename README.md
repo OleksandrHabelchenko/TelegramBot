@@ -20,3 +20,6 @@ Telegram bot built with Python.
 1. Install dependencies: pip install pytelegrambotapi requests
 2. Add your token in bot.py
 3. Run: python bot.py
+
+## Deployment
+Bot is live and running 24/7 on Railway cloud platform.
