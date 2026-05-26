@@ -1,6 +1,13 @@
 import telebot
 
-TOKEN = '8666645591:AAEdw3hlRbJish1BdLNHcHIOlU4kA5sFQJg'
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+TOKEN = os.getenv('TOKEN')
+API_KEY = os.getenv('API_KEY')
 
 bot = telebot.TeleBot(TOKEN)  # create bot object with token
 
@@ -41,7 +48,6 @@ def weather(message):
 
 def get_weather(message):                  # called after user sends city name
     city = message.text
-    API_KEY = '8ced06cef7271d7ed22b85062e97c6fc'
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric&lang=en'
     import requests
     response = requests.get(url)           # send request to weather API
